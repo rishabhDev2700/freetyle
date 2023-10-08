@@ -8,7 +8,7 @@ class Category(models.Model):
     name = models.CharField(max_length=20)
     description = models.TextField()
     slug=models.SlugField(unique=True,max_length=20)
-    cover = models.ImageField(upload_to="/")
+    cover = models.ImageField(upload_to="media/categories")
 
     def get_absolute_url(self):
         return reverse('store:get_category',args=[self.slug])
