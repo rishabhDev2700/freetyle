@@ -1,3 +1,6 @@
 /.vscode
 /env/
 /media/
+/core/.env
+/core/__pycache__/*
+/*/__pycache__/*
