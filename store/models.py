@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.db import models
 from django.urls import reverse
-
+from taggit.managers import TaggableManager
 # Create your models here.
 
 class Category(models.Model):
@@ -27,6 +27,7 @@ class Product(models.Model):
     quantity = models.PositiveSmallIntegerField()
     date_added = models.DateTimeField()
     date_updated = models.DateTimeField()
+    tags = TaggableManager()
     # images
 
 
