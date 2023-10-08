@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 
@@ -24,7 +25,8 @@ class Product(models.Model):
     category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True)
     visible = models.BooleanField(default=False)
     quantity = models.PositiveSmallIntegerField()
-
+    date_added = models.DateTimeField()
+    date_updated = models.DateTimeField()
     # images
 
 
@@ -33,3 +35,11 @@ class Product(models.Model):
     
     def __str__(self) -> str:
         return "Product:"+self.name+"\tPrice:"+str(self.price)
+    
+    def save(self, *args, **kwargs):
+        ''' On save, update timestamps '''
+        if not self.id: # type: ignore
+            self.date_added = timezone.now()
+        self.date_updated = timezone.now()
+        return super(Product, self).save(*args, **kwargs)
+
