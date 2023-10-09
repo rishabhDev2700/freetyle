@@ -22,7 +22,7 @@ from core import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/',include('authentication.urls')),
-    path('store/',include('store.urls')),
+    path('',include('store.urls')),
 ]
 
 if settings.DEBUG:
