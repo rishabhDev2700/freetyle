@@ -10,6 +10,9 @@ class Category(models.Model):
     slug=models.SlugField(unique=True,max_length=20)
     cover = models.ImageField(upload_to="media/categories")
 
+    class Meta:
+        verbose_name_plural = "Categories"
+        
     def get_absolute_url(self):
         return reverse('store:get_category',args=[self.slug])
     
@@ -38,7 +41,6 @@ class Product(models.Model):
         return "Product:"+self.name+"\tPrice:"+str(self.price)
     
     def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
         if not self.id: # type: ignore
             self.date_added = timezone.now()
         self.date_updated = timezone.now()

@@ -6,21 +6,21 @@ from store.models import Category, Product
 def get_categories(request):
     categories = Category.objects.all()
     context = {"categories":categories}
-    return render(request,"",context)
+    return render(request,"store/categories_list.html",context)
 
 def get_category(request,name):
     try:
-        category = Category.objects.filter(slug=name)
+        category = Category.objects.get(slug=name)
         products = Product.objects.filter(category=category)
     except(Exception):
         return render(request,"404.html")
     context={"category":category,"products":products}
-    return render(request,"",context)    
+    return render(request,"store/category.html",context)    
 
 def get_products(request):
     products = Product.objects.filter(visible=True)
     context = {"products":products}
-    return render(request,"",context)
+    return render(request,"store/products_list.html",context)
 
 def get_product(request,name):
     try:
